@@ -249,7 +249,29 @@ p2.area  # Area in square meters
 
 rtree
 =====
+ - Create and query spatial indexes, R*Tree
+ - Uses libspatialindex under the hood
 
+```
+from rtree import index
+# Create a list of neighborhood objects that have attributes:
+#   .name : string
+#   .polygon : Shapely Polygon object
+neighborhoods = read_neighborhoods(filename)
+
+# Create and populate the index
+idx = index.Index()
+for i, n in enumerate(neightborhoods):
+    idx.insert(i, n.polygon.bounds)
+
+# Query for polygons whose bounds overlap a point 
+x, y = -71.097389, 42.346599  # Fenway Park coordinates
+list(idx.intersection((x, y, x, y)))
+   [16]
+neighborhoods[16].name
+    'Fenway'
+
+```
 
 Write Some Code
 ===============

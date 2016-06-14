@@ -163,7 +163,8 @@ Follow along:
 <section id="libspatialindex" class="slide level1">
 <h1><a href="https://libspatialindex.github.io/">libspatialindex</a></h1>
 <ul>
-<li>Library for creating and storing spatial indexes</li>
+<li>Library for creating and storing spatial indexes like <a href="https://en.wikipedia.org/wiki/R-tree">R-trees</a> and other variants</li>
+<li>Spatial indexes are a critical component of making spatial applications fast.</li>
 <li>Provides indexes for spatial+temporal data too (MVTree and TPRTree)</li>
 </ul>
 </section>
@@ -334,6 +335,28 @@ p2.area  # Area in square meters
 </section>
 <section id="rtree" class="slide level1">
 <h1>rtree</h1>
+<ul>
+<li>Create and query spatial indexes, R*Tree</li>
+<li>Uses libspatialindex under the hood</li>
+</ul>
+<pre><code>from rtree import index
+# Create a list of neighborhood objects that have attributes:
+#   .name : string
+#   .polygon : Shapely Polygon object
+neighborhoods = read_neighborhoods(filename)
+
+# Create and populate the index
+idx = index.Index()
+for i, n in enumerate(neightborhoods):
+    idx.insert(i, n.polygon.bounds)
+
+# Query for polygons whose bounds overlap a point 
+x, y = -71.097389, 42.346599  # Fenway Park coordinates
+list(idx.intersection((x, y, x, y)))
+   [16]
+neighborhoods[16].name
+    &#39;Fenway&#39;
+</code></pre>
 </section>
 <section id="write-some-code" class="slide level1">
 <h1>Write Some Code</h1>
