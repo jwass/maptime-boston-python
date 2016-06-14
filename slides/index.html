@@ -63,7 +63,7 @@
 Follow along:
 </h3>
 <h3>
-<a href="https://jwass.github.io/maptime-python" class="uri">https://jwass.github.io/maptime-python</a>
+<a href="https://jwass.github.io/maptime-boston-python/slides" class="uri">https://jwass.github.io/maptime-boston-python/slides</a>
 </h3>
 </section>
 </section>
@@ -121,10 +121,10 @@ Follow along:
 <section id="core-geospatial-libraries" class="slide level1">
 <h1>Core Geospatial Libraries</h1>
 </section>
-<section id="critical-spatial-needs" class="slide level1">
-<h1>Critical Spatial Needs</h1>
+<section id="common-spatial-needs" class="slide level1">
+<h1>Common Spatial Needs</h1>
 <ul>
-<li>Spatial operations / computational geometry (shape intersections, point in polygon, <a href="https://en.wikipedia.org/wiki/DE-9IM">DE-9IM</a> )</li>
+<li>Spatial predicates, operations, computational geometry (shape intersections, point in polygon, <a href="https://en.wikipedia.org/wiki/DE-9IM">DE-9IM</a> )</li>
 <li>File I/O (vector / raster) for many formats</li>
 <li>Raster image manipulation</li>
 <li>Projections and transformations</li>
@@ -241,6 +241,100 @@ Follow along:
 </table>
 <p>Python &quot;glue&quot; libraries wrap low-level functionality.</p>
 </section>
+<section id="shapely" class="slide level1">
+<h1><a href="http://toblerity.org/shapely/manual.html">shapely</a></h1>
+<p>Create and manipulate 2D geometry objects</p>
+<pre><code>from shapely.geometry import Point, LineString, Polygon
+
+p = Point(x, y)
+line = LineString([(x0, y0), (x1, y1), (x2, y2)])
+polygon = Polygon([(x0, y0), (x1, y1), (x2, y2)])
+</code></pre>
+<ul>
+<li>Creates GEOS geometry objects under the hood</li>
+<li>Spatial predicates: <code>intersects</code>, <code>contains</code>, <code>within</code>, <code>crosses</code>, ...</li>
+<li>Spatial analysis: <code>intersection</code>, <code>difference</code>, <code>union</code>, ...</li>
+</ul>
+</section>
+<section id="fiona" class="slide level1">
+<h1><a href="http://toblerity.org/fiona/manual.html">fiona</a></h1>
+<ul>
+<li>&quot;Fiona is OGR’s neat, nimble, no-nonsense API&quot; (FIONnnA)</li>
+<li>I like to remember it as File I/O or Feature I/O</li>
+<li>Reads and writes vector formats with a GeoJSON-like model (i.e., a single geometry with a key/value properties)</li>
+<li><code>fio</code> command line program for quick access and for use in command pipelines</li>
+<li>Uses GDAL under the hood</li>
+</ul>
+</section>
+<section id="fiona-1" class="slide level1">
+<h1><a href="http://toblerity.org/fiona/manual.html">fiona</a></h1>
+<pre><code>import fiona
+
+with fiona.open(&#39;Boston_Neighborhoods.shp&#39;) as f:
+    crs = f.crs
+    features = list(f)
+
+print(crs)
+  {&#39;init&#39;: u&#39;epsg:4326&#39;}
+
+print(features[0])
+  {&#39;type&#39;: &#39;Feature&#39;,
+   &#39;geometry&#39;: { &#39;type&#39;: &#39;MultiPolygon&#39;, &#39;coordinates&#39;: ...},
+   &#39;id&#39;: &#39;0&#39;,
+   &#39;properties&#39;: OrderedDict([(&#39;Acres&#39;, 1605.56181523),
+                (&#39;Name&#39;, &#39;Roslindale&#39;),
+                (&#39;OBJECTID&#39;, 1),
+                (&#39;SHAPE_area&#39;, 69938272.6723),
+                (&#39;SHAPE_len&#39;, 53563.9125971)])
+  }</code></pre>
+</section>
+<section id="rasterio" class="slide level1">
+<h1>rasterio</h1>
+</section>
+<section id="pyproj" class="slide level1">
+<h1><a href="http://jswhit.github.io/pyproj/">pyproj</a></h1>
+<ul>
+<li>Projects points from one CRS to another CRS</li>
+<li>Combine with Shapely to reproject geometry objects</li>
+<li>Uses Proj.4 under the hood</li>
+</ul>
+<pre><code>import math
+import pyproj
+
+proj = pyproj.Proj(init=&#39;epsg:26986&#39;)
+x0, y0 = proj(-71.0838, 42.3627)  # CIC coordinates
+x1, y1 = proj(-71.1057, 42.3670)  # Cambridge City Hall coordinates
+
+# Euclidean distance in meters
+math.sqrt((x1 - x0) ** 2 + (y1 - y0) ** 2)
+   1866.132 
+</code></pre>
+</section>
+<section id="pyproj-1" class="slide level1">
+<h1><a href="http://jswhit.github.io/pyproj/">pyproj</a></h1>
+<p>Project Shapely geometry objects</p>
+<pre><code>from functools import partial
+import pyproj
+from shapely.geometry import Polygon
+from shapely.ops import transform
+
+project = partial(
+    pyproj.transform,
+    pyproj.Proj(init=&#39;epsg:4326&#39;),
+    pyproj.Proj(init=&#39;epsg:26986&#39;))
+
+# Outline of CIC building
+p = Polygon([[-71.08372, 42.36313], [-71.08296, 42.36293], [-71.08303, 42.36239], [-71.08371, 42.36253], [-71.0840, 42.36266], [-71.08372, 42.36313]])
+
+p2 = transform(project, p)
+p2.area  # Area in square meters
+    4591.96
+
+</code></pre>
+</section>
+<section id="rtree" class="slide level1">
+<h1>rtree</h1>
+</section>
 <section id="write-some-code" class="slide level1">
 <h1>Write Some Code</h1>
 </section>
@@ -258,14 +352,20 @@ In [1]: %run shapes.py
 <h1>shapes.py</h1>
 <pre><code>from shapely.geometry import Point, LineString, Polygon
 
+# Create a Point with x, y coordinates
 point1 = Point(1.5, 0.5)
 point2 = Point(2.5, 2.5)
 
+# Create a LineString with a list of (x, y) tuples
 line1 = LineString([(0.5, 1.5), (3.5, 1.5)])
 
-# Shapely will automatically close the polygon
 poly1 = Polygon([(1.0, 0.0), (3.0, 0.0), (2.0, 2.0)])
-poly2 = Polygon([(2.0, 0.5), (3.5, 0.5), (3.5, 1.0), (2.0, 1.0)])</code></pre>
+poly2 = Polygon([(2.0, 0.5), (3.5, 0.5), (3.5, 1.0), (2.0, 1.0)])
+
+# Polygons can have holes. Specify them as a list of list of (x, y) tuples
+poly_w_hole = Polygon([(0.0, 0.0), (5.0, 0.0), (5.0, 5.0), (0.0, 5.0)],
+                      [[(1.0, 1.0), (2.0, 1.0), (2.0, 2.0), (1.0, 2.0)],
+                       [(3.0, 3.0), (4.0, 3.0), (4.0, 4.0), (3.0, 4.0)]])</code></pre>
 </section>
     </div>
   </div>
