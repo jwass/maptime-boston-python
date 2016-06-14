@@ -197,6 +197,11 @@ print(features[0])
   }
 ```
 
+[rasterio](https://github.com/mapbox/rasterio)
+==============================================
+- TODO: FINISH
+- `rio` command line tool for quick access and use in pipelines
+
 [pyproj](http://jswhit.github.io/pyproj/)
 =========================================
 - Projects points from one CRS to another CRS
@@ -337,3 +342,9 @@ poly_w_hole = Polygon([(0.0, 0.0), (5.0, 0.0), (5.0, 5.0), (0.0, 5.0)],
                       [[(1.0, 1.0), (2.0, 1.0), (2.0, 2.0), (1.0, 2.0)],
                        [(3.0, 3.0), (4.0, 3.0), (4.0, 4.0), (3.0, 4.0)]])
 ```
+
+ratmap
+======
+
+- TODO: 
+- Present with ipython / Jupyter notebook
