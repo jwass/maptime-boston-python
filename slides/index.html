@@ -95,7 +95,7 @@ Follow along:
 <li><a href="https://djangoproject.com">Django</a>: &quot;batteries included&quot; framework</li>
 <li><a href="http://flask.pocoo.org/">Flask</a>: &quot;microframework&quot; with large community of extensions and functionality</li>
 </ul>
-<p>Many companies are built on Python as their primary backend language</p>
+<p>Many companies are built with Python as primary backend language</p>
 </section>
 <section id="repl-environments" class="slide level1">
 <h1><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> environments</h1>
@@ -111,7 +111,7 @@ Follow along:
 <li><a href="http://docs.scipy.org/doc/numpy-1.10.1/user/c-info.python-as-glue.html">&quot;Using Python as a Glue Language&quot;</a></li>
 <li>Python bindings &quot;wrap&quot; C/C++ libraries</li>
 <li>Enables idiomatic Python constructs with C/C++ speed and memory control when necessary</li>
-<li>We don't necessarily have to re-code a library in Python to use it from Python.</li>
+<li>Don't have to re-code a library in Python to use it from Python.</li>
 <li><a href="http://cython.org/">cython</a>: a Python-like language that compiles C extensions</li>
 </ul>
 </section>
@@ -144,9 +144,9 @@ Follow along:
 <h1><a href="http://www.gdal.org/">GDAL</a></h1>
 <ul>
 <li>Geospatial Data Abstraction Library</li>
-<li>Both vector and raster data I/O</li>
+<li>Reads and writes both vector and raster data for many formats</li>
 <li>Raster manipulation capability</li>
-<li>Installs utility programs ogr2ogr, ogrinfo, gdalwarp, etc.</li>
+<li>Installs utility programs <code>ogr2ogr</code>, <code>ogrinfo</code>, <code>gdalwarp</code>, etc.</li>
 <li>OGR stands for ¯\_(ツ)_/¯</li>
 <li><a href="http://gis.stackexchange.com/questions/72120/why-do-people-pronounce-gdal-geospatial-data-abstraction-library-like-goo-dal">How do you pronounce GDAL?</a> ¯\_(ツ)_/¯</li>
 <li>See <a href="https://4326.us/maptime-data-formats/#/">Shaun Walbridge's Maptime Boston Presentation</a> about geospatial file formats</li>
@@ -163,9 +163,9 @@ Follow along:
 <section id="libspatialindex" class="slide level1">
 <h1><a href="https://libspatialindex.github.io/">libspatialindex</a></h1>
 <ul>
-<li>Library for creating and storing spatial indexes like <a href="https://en.wikipedia.org/wiki/R-tree">R-trees</a> and other variants</li>
-<li>Spatial indexes are a critical component of making spatial applications fast.</li>
-<li>Provides indexes for spatial+temporal data too (MVTree and TPRTree)</li>
+<li>Library for creating and storing spatial indexes: <a href="https://en.wikipedia.org/wiki/R-tree">R-trees</a> and variants fast.</li>
+<li>Provides indexes for spatial+temporal data (<code>MVTree</code> and <code>TPRTree</code>)</li>
+<li>Spatial indexing is a critical component of keeping spatial applications</li>
 </ul>
 </section>
 <section id="geospatial-libraries" class="slide level1">
@@ -262,7 +262,7 @@ polygon = Polygon([(x0, y0), (x1, y1), (x2, y2)])
 <ul>
 <li>&quot;Fiona is OGR’s neat, nimble, no-nonsense API&quot; (FIONnnA)</li>
 <li>I like to remember it as File I/O or Feature I/O</li>
-<li>Reads and writes vector formats with a GeoJSON-like model (i.e., a single geometry with a key/value properties)</li>
+<li>Reads and writes vector formats with a GeoJSON-like model (i.e., features with a geometry and key/value properties)</li>
 <li><code>fio</code> command line program for quick access and for use in command pipelines</li>
 <li>Uses GDAL under the hood</li>
 </ul>

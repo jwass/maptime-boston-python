@@ -37,7 +37,7 @@ Web Frameworks
  - [Flask](http://flask.pocoo.org/): "microframework" with large community of
    extensions and functionality
 
- Many companies are built on Python as their primary backend language
+ Many companies are built with Python as primary backend language
 
 
 [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) environments
@@ -55,7 +55,7 @@ Glue Language
  - Python bindings  "wrap" C/C++ libraries
  - Enables idiomatic Python constructs with C/C++ speed and memory control
    when necessary
- - We don't necessarily have to re-code a library in Python to use
+ - Don't have to re-code a library in Python to use
    it from Python.
  - [cython](http://cython.org/): a Python-like language that compiles C
    extensions
@@ -90,9 +90,9 @@ Common Spatial Needs
 ======
 
  - Geospatial Data Abstraction Library
- - Both vector and raster data I/O
+ - Reads and writes both vector and raster data for many formats
  - Raster manipulation capability
- - Installs utility programs ogr2ogr, ogrinfo, gdalwarp, etc.
+ - Installs utility programs `ogr2ogr`, `ogrinfo`, `gdalwarp`, etc.
  - OGR stands for ¯\\_(ツ)\_/¯
  - [How do you pronounce GDAL?](http://gis.stackexchange.com/questions/72120/why-do-people-pronounce-gdal-geospatial-data-abstraction-library-like-goo-dal)
    ¯\\_(ツ)\_/¯
@@ -108,10 +108,10 @@ Common Spatial Needs
 [libspatialindex](https://libspatialindex.github.io/)
 =====================================================
 
- - Library for creating and storing spatial indexes like [R-trees](https://en.wikipedia.org/wiki/R-tree) and other variants
- - Spatial indexes are a critical component of making spatial applications
+ - Library for creating and storing spatial indexes: [R-trees](https://en.wikipedia.org/wiki/R-tree) and variants
    fast.
- - Provides indexes for spatial+temporal data too (MVTree and TPRTree)
+ - Provides indexes for spatial+temporal data (`MVTree` and `TPRTree`)
+ - Spatial indexing is a critical component of keeping spatial applications
 
 
 Geospatial Libraries
@@ -166,8 +166,8 @@ polygon = Polygon([(x0, y0), (x1, y1), (x2, y2)])
 
 - "Fiona is OGR’s neat, nimble, no-nonsense API" (FIONnnA)
 - I like to remember it as File I/O or Feature I/O
-- Reads and writes vector formats with a GeoJSON-like model (i.e., a
-  single geometry with a key/value properties)
+- Reads and writes vector formats with a GeoJSON-like model (i.e., features
+  with a geometry and key/value properties)
 - `fio` command line program for quick access and for use in command pipelines
 - Uses GDAL under the hood
 
