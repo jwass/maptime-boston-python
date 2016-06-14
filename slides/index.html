@@ -73,7 +73,7 @@ Follow along:
 <li>Why Python?</li>
 <li>Core Geospatial Libraries</li>
 <li>Geospatial Python Libraries</li>
-<li>Write Some Code</li>
+<li>Examples and Exercises</li>
 </ul>
 </section>
 <section id="why-python" class="slide level1">
@@ -289,9 +289,6 @@ print(features[0])
                 (&#39;SHAPE_len&#39;, 53563.9125971)])
   }</code></pre>
 </section>
-<section id="rasterio" class="slide level1">
-<h1>rasterio</h1>
-</section>
 <section id="pyproj" class="slide level1">
 <h1><a href="http://jswhit.github.io/pyproj/">pyproj</a></h1>
 <ul>
@@ -334,7 +331,7 @@ p2.area  # Area in square meters
 </code></pre>
 </section>
 <section id="rtree" class="slide level1">
-<h1>rtree</h1>
+<h1><a href="https://pypi.python.org/pypi/Rtree/">rtree</a></h1>
 <ul>
 <li>Create and query spatial indexes, R*Tree</li>
 <li>Uses libspatialindex under the hood</li>
@@ -358,8 +355,31 @@ neighborhoods[16].name
     &#39;Fenway&#39;
 </code></pre>
 </section>
-<section id="write-some-code" class="slide level1">
-<h1>Write Some Code</h1>
+<section id="examples-and-exercises" class="slide level1">
+<h1>Examples and Exercises</h1>
+</section>
+<section id="virtual-environments" class="slide level1">
+<h1>Virtual Environments</h1>
+<ul>
+<li>Separate environments for different Python projects</li>
+<li>Allows multiple versions of libraries to be installed without interfering with each other</li>
+<li>Easier testing of installation and deploy scripts</li>
+<li>Two tools to create/manage virtual environments: <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> and <a href="http://conda.pydata.org/docs/intro.html">conda</a></li>
+<li><p>Conda is newer and generally makes installing native dependencies (like GDAL, GEOS) easier than virtualenv.</p></li>
+<li><p>Tip: Use a new environment for every project. Do not install libraries into your global python installation (i.e., no <code>sudo pip install ...</code>)</p></li>
+</ul>
+</section>
+<section id="virtualenv" class="slide level1">
+<h1><a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a></h1>
+<pre><code>virtualenv ~/venv
+source ~/venv/bin/activate
+pip install shapely fiona</code></pre>
+</section>
+<section id="conda" class="slide level1">
+<h1><a href="http://conda.pydata.org/docs/intro.html">conda</a></h1>
+<pre><code>conda create -n venv shapely fiona
+source activate venv
+</code></pre>
 </section>
 <section id="shapes" class="slide level1">
 <h1>Shapes</h1>

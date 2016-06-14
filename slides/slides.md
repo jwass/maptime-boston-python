@@ -15,7 +15,7 @@ Overview
 - Why Python?
 - Core Geospatial Libraries
 - Geospatial Python Libraries
-- Write Some Code
+- Examples and Exercises
 
 
 Why Python?
@@ -197,9 +197,6 @@ print(features[0])
   }
 ```
 
-rasterio
-========
-
 [pyproj](http://jswhit.github.io/pyproj/)
 =========================================
 - Projects points from one CRS to another CRS
@@ -247,7 +244,7 @@ p2.area  # Area in square meters
 
 ```
 
-rtree
+[rtree](https://pypi.python.org/pypi/Rtree/)
 =====
  - Create and query spatial indexes, R*Tree
  - Uses libspatialindex under the hood
@@ -273,8 +270,40 @@ neighborhoods[16].name
 
 ```
 
-Write Some Code
+Examples and Exercises
 ===============
+
+Virtual Environments
+====================
+- Separate environments for different Python projects
+- Allows multiple versions of libraries to be installed without
+  interfering with each other
+- Easier testing of installation and deploy scripts
+- Two tools to create/manage virtual environments: [virtualenv](https://virtualenv.pypa.io/en/stable/) and [conda](http://conda.pydata.org/docs/intro.html)
+- Conda is newer and generally makes installing native dependencies (like
+  GDAL, GEOS) easier than virtualenv.
+
+- Tip: Use a new environment for every project. Do not install libraries
+  into your global python installation (i.e., no `sudo pip install ...`)
+
+
+[virtualenv](https://virtualenv.pypa.io/en/stable/)
+===================================================
+
+```
+virtualenv ~/venv
+source ~/venv/bin/activate
+pip install shapely fiona
+```
+
+[conda](http://conda.pydata.org/docs/intro.html)
+================================================
+
+```
+conda create -n venv shapely fiona
+source activate venv
+
+```
 
 Shapes
 ======
