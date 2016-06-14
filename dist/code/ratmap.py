@@ -85,6 +85,8 @@ def assign_rodent_counts(neighborhoods, rodents):
         n.n_rodents = 0
 
     # For each rodent, find the neighborhood it belongs to.
+    # Exercise: Use a spatial index instead of iterating over all the
+    # neighborhoods.
     for r in rodents:
         for n in neighborhoods:
             if n.polygon.contains(r):
