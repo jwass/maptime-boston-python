@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jacob Wasserman / @jwass2000">
+  <title>Geospatial Processing   with Python</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <style type="text/css">
+      .reveal pre.sourceCode {
+          line-height: 1.5em;
+          font-size: 0.65em;
+      }
+  
+      .reveal a {
+          color: #78dcfd;
+      }
+  
+      .reveal h1 {
+          font-weight: bold;
+          font-size: 3.0em;
+      }
+  
+      .reveal h2.author {
+          text-align: left;
+      }
+      .reveal h1.title {
+          text-align: left;
+          font-size: 2.7em;
+      } 
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Geospatial Processing <br> with Python</h1>
+  <h2 class="author"><small>Jacob Wasserman / <a href="https://twitter.com/jwass200"><span class="citation" data-cites="jwass2000">@jwass2000</span></a></small></h2>
+  <h3 class="date"><small><a href="https://twitter.com/MaptimeBoston">Maptime Boston</a> — 2016-06-15</small></h3>
+</section>
+
+<section class="slide level1">
+
+<section>
+<h3>
+Follow along:
+</h3>
+<h3>
+<a href="https://jwass.github.io/maptime-python" class="uri">https://jwass.github.io/maptime-python</a>
+</h3>
+</section>
+</section>
+<section id="overview" class="slide level1">
+<h1>Overview</h1>
+<ul>
+<li>Why Python?</li>
+<li>Core Geospatial Libraries</li>
+<li>Geospatial Python Libraries</li>
+<li>Write Some Code</li>
+</ul>
+</section>
+<section id="why-python" class="slide level1">
+<h1>Why Python?</h1>
+</section>
+<section id="scientific-computing" class="slide level1">
+<h1>Scientific Computing</h1>
+<ul>
+<li><a href="http://numpy.org">numpy</a>: vectorized array/matrix data structures</li>
+<li><a href="http://scipy.org">scipy</a>: linear algebra, optimization, and much more</li>
+<li><a href="http://pandas.pydata.org/">pandas</a>: data analysis, extraction, cleaning</li>
+<li><a href="http://scikit-image.org/">scikit-image</a>: image processing</li>
+<li><a href="http://scikit-learn.org/stable/">scikit-learn</a>: machine learning</li>
+</ul>
+</section>
+<section id="web-frameworks" class="slide level1">
+<h1>Web Frameworks</h1>
+<ul>
+<li><a href="https://djangoproject.com">Django</a>: &quot;batteries included&quot; framework</li>
+<li><a href="http://flask.pocoo.org/">Flask</a>: &quot;microframework&quot; with large community of extensions and functionality</li>
+</ul>
+<p>Many companies are built on Python as their primary backend language</p>
+</section>
+<section id="repl-environments" class="slide level1">
+<h1><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> environments</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read Eval Print Loop</a></li>
+<li><a href="https://ipython.org/">ipython</a>: interactive computing environment</li>
+<li><a href="http://jupyter.org/">Jupyter Notebook</a>: web-based with inline results and presentation</li>
+</ul>
+</section>
+<section id="glue-language" class="slide level1">
+<h1>Glue Language</h1>
+<ul>
+<li><a href="http://docs.scipy.org/doc/numpy-1.10.1/user/c-info.python-as-glue.html">&quot;Using Python as a Glue Language&quot;</a></li>
+<li>Python bindings &quot;wrap&quot; C/C++ libraries</li>
+<li>Enables idiomatic Python constructs with C/C++ speed and memory control when necessary</li>
+<li>We don't necessarily have to re-code a library in Python to use it from Python.</li>
+<li><a href="http://cython.org/">cython</a>: a Python-like language that compiles C extensions</li>
+</ul>
+</section>
+<section id="much-more" class="slide level1">
+<h1>Much More!</h1>
+</section>
+<section id="core-geospatial-libraries" class="slide level1">
+<h1>Core Geospatial Libraries</h1>
+</section>
+<section id="critical-spatial-needs" class="slide level1">
+<h1>Critical Spatial Needs</h1>
+<ul>
+<li>Spatial operations / computational geometry (shape intersections, point in polygon, <a href="https://en.wikipedia.org/wiki/DE-9IM">DE-9IM</a> )</li>
+<li>File I/O (vector / raster) for many formats</li>
+<li>Raster image manipulation</li>
+<li>Projections and transformations</li>
+<li>Spatial indexing</li>
+</ul>
+</section>
+<section id="geos" class="slide level1">
+<h1><a href="https://trac.osgeo.org/geos/">GEOS</a></h1>
+<ul>
+<li>Geometry Engine Open Source</li>
+<li>Defines Point, LineString, Polygon, Multi* types</li>
+<li>Spatial predicates (intersects, contains, touches, etc) and other operations between any combination of geometries</li>
+<li>Most PostGIS geometry type (but not geography) operations use GEOS under the hood</li>
+</ul>
+</section>
+<section id="gdal" class="slide level1">
+<h1><a href="http://www.gdal.org/">GDAL</a></h1>
+<ul>
+<li>Geospatial Data Abstraction Library</li>
+<li>Both vector and raster data I/O</li>
+<li>Raster manipulation capability</li>
+<li>Installs utility programs ogr2ogr, ogrinfo, gdalwarp, etc.</li>
+<li>OGR stands for ¯\_(ツ)_/¯</li>
+<li><a href="http://gis.stackexchange.com/questions/72120/why-do-people-pronounce-gdal-geospatial-data-abstraction-library-like-goo-dal">How do you pronounce GDAL?</a> ¯\_(ツ)_/¯</li>
+<li>See <a href="https://4326.us/maptime-data-formats/#/">Shaun Walbridge's Maptime Boston Presentation</a> about geospatial file formats</li>
+</ul>
+</section>
+<section id="proj.4" class="slide level1">
+<h1><a href="https://trac.osgeo.org/proj/">PROJ.4</a></h1>
+<ul>
+<li>Library and <code>proj</code> utility to convert data between projections</li>
+<li>Defines the <code>+proj=poly -m 1:25000 +lat_0=35 ...</code> projection definitions</li>
+<li>See <a href="http://mjfoster83.github.io/projections/index.html#/">Mike Foster's Maptime Boston Presentation</a> about projections</li>
+</ul>
+</section>
+<section id="libspatialindex" class="slide level1">
+<h1><a href="https://libspatialindex.github.io/">libspatialindex</a></h1>
+<ul>
+<li>Library for creating and storing spatial indexes</li>
+<li>Provides indexes for spatial+temporal data too (MVTree and TPRTree)</li>
+</ul>
+</section>
+<section id="geospatial-libraries" class="slide level1">
+<h1>Geospatial Libraries</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Capability</th>
+<th>C/C++ Library</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Spatial Operations</td>
+<td><a href="https://trac.osgeo.org/geos/">GEOS</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vector I/O</td>
+<td><a href="http://www.gdal.org/">GDAL (OGR)</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Raster Operations and I/O</td>
+<td><a href="http://www.gdal.org/">GDAL</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Projections</td>
+<td><a href="https://trac.osgeo.org/proj/">PROJ.4</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spatial Indexing</td>
+<td><a href="https://libspatialindex.github.io/">libspatialindex</a></td>
+</tr>
+</tbody>
+</table>
+<p>Many geospatial applications use one or more of these</p>
+</section>
+<section id="python-geospatial" class="slide level1">
+<h1>Python Geospatial</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Capability</th>
+<th>C/C++ Library</th>
+<th style="text-align: left;">Python Library</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Spatial Operations</td>
+<td><a href="https://trac.osgeo.org/geos/">GEOS</a></td>
+<td style="text-align: left;"><a href="http://toblerity.org/shapely/manual.html">shapely</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Vector I/O</td>
+<td><a href="http://www.gdal.org/">GDAL (OGR)</a></td>
+<td style="text-align: left;"><a href="http://toblerity.org/fiona/manual.html">fiona</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Raster Operations and I/O</td>
+<td><a href="http://www.gdal.org/">GDAL</a></td>
+<td style="text-align: left;"><a href="https://github.com/mapbox/rasterio">rasterio</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Projections</td>
+<td><a href="https://trac.osgeo.org/proj/">PROJ.4</a></td>
+<td style="text-align: left;"><a href="http://jswhit.github.io/pyproj/">pyproj</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spatial Indexing</td>
+<td><a href="https://libspatialindex.github.io/">libspatialindex</a></td>
+<td style="text-align: left;"><a href="https://pypi.python.org/pypi/Rtree/">rtree</a></td>
+</tr>
+</tbody>
+</table>
+<p>Python &quot;glue&quot; libraries wrap low-level functionality.</p>
+</section>
+<section id="write-some-code" class="slide level1">
+<h1>Write Some Code</h1>
+</section>
+<section id="shapes" class="slide level1">
+<h1>Shapes</h1>
+<figure>
+<img src="images/maptime-polygons.bmp" />
+</figure>
+<pre><code>$ ipython
+
+In [1]: %run shapes.py
+</code></pre>
+</section>
+<section id="shapes.py" class="slide level1">
+<h1>shapes.py</h1>
+<pre><code>from shapely.geometry import Point, LineString, Polygon
+
+point1 = Point(1.5, 0.5)
+point2 = Point(2.5, 2.5)
+
+line1 = LineString([(0.5, 1.5), (3.5, 1.5)])
+
+# Shapely will automatically close the polygon
+poly1 = Polygon([(1.0, 0.0), (3.0, 0.0), (2.0, 2.0)])
+poly2 = Polygon([(2.0, 0.5), (3.5, 0.5), (3.5, 1.0), (2.0, 1.0)])</code></pre>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
