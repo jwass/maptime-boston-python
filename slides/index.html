@@ -385,8 +385,8 @@ pip install shapely fiona</code></pre>
 <section id="conda" class="slide level1">
 <h1><a href="http://conda.pydata.org/docs/intro.html">conda</a></h1>
 <pre><code>conda config --add channels conda-forge  # Properly install GIS packages
-conda create -n venv shapely fiona
-source activate venv
+conda create -n maptime shapely fiona ipython
+source activate maptime
 </code></pre>
 </section>
 <section id="shapes" class="slide level1">
@@ -418,12 +418,24 @@ poly_w_hole = Polygon([(0.0, 0.0), (5.0, 0.0), (5.0, 5.0), (0.0, 5.0)],
                       [[(1.0, 1.0), (2.0, 1.0), (2.0, 2.0), (1.0, 2.0)],
                        [(3.0, 3.0), (4.0, 3.0), (4.0, 4.0), (3.0, 4.0)]])</code></pre>
 </section>
-<section id="ratmap" class="slide level1">
-<h1>ratmap</h1>
-<ul>
-<li>TODO:</li>
-<li>Present with ipython / Jupyter notebook</li>
-</ul>
+<section id="ratmap-no-map" class="slide level1">
+<h1>#ratmap (no map)</h1>
+<pre><code>%run code/ratmap.py
+
+neighborhoods = read_neighborhoods(&#39;data/Boston_Neighborhoods.shp&#39;)
+rodents = read_rodents(&#39;data/rodents.geojson&#39;)
+assign_rodent_counts(neighborhoods, rodents)
+
+# Sort the neighborhoods by number of rodent reports
+neighborhoods.sort(key=lambda x: x.n_rodents)
+for n in neighborhoods:
+    print(&#39;%s: %s&#39; % (n.name, n.n_rodents))
+
+# Sort by rodent reports normalized by area
+neighborhoods.sort(key=lambda x: x.n_rodents / x.area)
+for n in neighborhoods:
+    print(&#39;%s: %s&#39; % (n.name, n.n_rodents))
+</code></pre>
 </section>
     </div>
   </div>

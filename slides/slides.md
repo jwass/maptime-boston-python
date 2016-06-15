@@ -306,8 +306,8 @@ pip install shapely fiona
 
 ```
 conda config --add channels conda-forge  # Properly install GIS packages
-conda create -n venv shapely fiona
-source activate venv
+conda create -n maptime shapely fiona ipython
+source activate maptime
 
 ```
 
@@ -344,8 +344,24 @@ poly_w_hole = Polygon([(0.0, 0.0), (5.0, 0.0), (5.0, 5.0), (0.0, 5.0)],
                        [(3.0, 3.0), (4.0, 3.0), (4.0, 4.0), (3.0, 4.0)]])
 ```
 
-ratmap
+\#ratmap (no map)
 ======
 
-- TODO: 
-- Present with ipython / Jupyter notebook
+```
+%run code/ratmap.py
+
+neighborhoods = read_neighborhoods('data/Boston_Neighborhoods.shp')
+rodents = read_rodents('data/rodents.geojson')
+assign_rodent_counts(neighborhoods, rodents)
+
+# Sort the neighborhoods by number of rodent reports
+neighborhoods.sort(key=lambda x: x.n_rodents)
+for n in neighborhoods:
+    print('%s: %s' % (n.name, n.n_rodents))
+
+# Sort by rodent reports normalized by area
+neighborhoods.sort(key=lambda x: x.n_rodents / x.area)
+for n in neighborhoods:
+    print('%s: %s' % (n.name, n.n_rodents))
+
+```
