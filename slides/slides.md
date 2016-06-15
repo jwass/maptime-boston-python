@@ -277,13 +277,13 @@ neighborhoods[16].name
 
 Even More Geospatial
 ==================
+ - [List of spatial packages](https://github.com/SpatialPython/spatial_python/blob/master/packages.md)
  - [geopandas](http://geopandas.org/): spatial extensions to pandas
  - [GeoDjango](https://docs.djangoproject.com/en/dev/ref/contrib/gis/):
    Spatial extensions to the Django ORM.
  - [Django-Rest-Framework-GIS](https://github.com/djangonauts/django-rest-framework-gis): Spatial extensions to the [Django-Rest-Framework](http://www.django-rest-framework.org/)
  - [GeoAlchemy](http://geoalchemy-2.readthedocs.io/en/0.3/): Spatial
    extensions to the [SQLAlchemy ORM](http://www.sqlalchemy.org/).
- - [List of spatial packages](https://github.com/SpatialPython/spatial_python/blob/master/packages.md)
 
 
 Examples and Exercises
