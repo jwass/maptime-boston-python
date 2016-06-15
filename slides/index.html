@@ -384,7 +384,8 @@ pip install shapely fiona</code></pre>
 </section>
 <section id="conda" class="slide level1">
 <h1><a href="http://conda.pydata.org/docs/intro.html">conda</a></h1>
-<pre><code>conda create -n venv shapely fiona
+<pre><code>conda config --add channels conda-forge  # Properly install GIS packages
+conda create -n venv shapely fiona
 source activate venv
 </code></pre>
 </section>

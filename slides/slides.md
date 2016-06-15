@@ -305,6 +305,7 @@ pip install shapely fiona
 ================================================
 
 ```
+conda config --add channels conda-forge  # Properly install GIS packages
 conda create -n venv shapely fiona
 source activate venv
 
