@@ -322,6 +322,25 @@ conda install ipython
 
 ```
 
+Get Started
+===========
+- Download [miniconda](http://conda.pydata.org/miniconda.html)
+- Download the [data package](https://www.dropbox.com/s/r8f18dnfryvsxiu/maptime-python.zip?dl=0)
+- Open a terminal app
+
+```
+$ conda create -n maptime -c conda-forge shapely fiona
+$ source activate maptime
+$ conda install ipython
+
+$ cd ~/Downloads
+$ unzip maptime-python.zip
+$ cd maptime-python/code
+$ ipython
+
+```
+
+
 Shapes
 ======
 ![](images/maptime-polygons.bmp)
