@@ -275,6 +275,17 @@ neighborhoods[16].name
 
 ```
 
+Even More Geospatial
+==================
+ - [geopandas](http://geopandas.org/): spatial extensions to pandas
+ - [GeoDjango](https://docs.djangoproject.com/en/dev/ref/contrib/gis/):
+   Spatial extensions to the Django ORM.
+ - [Django-Rest-Framework-GIS](https://github.com/djangonauts/django-rest-framework-gis): Spatial extensions to the [Django-Rest-Framework](http://www.django-rest-framework.org/)
+ - [GeoAlchemy](http://geoalchemy-2.readthedocs.io/en/0.3/): Spatial
+   extensions to the [SQLAlchemy ORM](http://www.sqlalchemy.org/).
+ - [List of spatial packages](https://github.com/SpatialPython/spatial_python/blob/master/packages.md)
+
+
 Examples and Exercises
 ===============
 
@@ -305,9 +316,9 @@ pip install shapely fiona
 ================================================
 
 ```
-conda config --add channels conda-forge  # Properly install GIS packages
-conda create -n maptime shapely fiona ipython
+conda create -n maptime -c conda-forge shapely fiona
 source activate maptime
+conda install ipython
 
 ```
 
@@ -365,3 +376,11 @@ for n in neighborhoods:
     print('%s: %s' % (n.name, n.n_rodents))
 
 ```
+
+
+That's All!
+===========
+- Slides, code, and data can be found at [https://github.com/jwass/maptime-boston-python](https://github.com/jwass/maptime-boston-python)
+- Feel free to follow up at the [meetup page](http://www.meetup.com/Maptime-Boston/events/231732596/).
+
+- Thanks to Michelle Fullwood, Sean Gillies, and Shaun Walbridge for early comments and feedback.

@@ -362,6 +362,16 @@ neighborhoods[16].name
     &#39;Fenway&#39;
 </code></pre>
 </section>
+<section id="even-more-geospatial" class="slide level1">
+<h1>Even More Geospatial</h1>
+<ul>
+<li><a href="http://geopandas.org/">geopandas</a>: spatial extensions to pandas</li>
+<li><a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/">GeoDjango</a>: Spatial extensions to the Django ORM.</li>
+<li><a href="https://github.com/djangonauts/django-rest-framework-gis">Django-Rest-Framework-GIS</a>: Spatial extensions to the <a href="http://www.django-rest-framework.org/">Django-Rest-Framework</a></li>
+<li><a href="http://geoalchemy-2.readthedocs.io/en/0.3/">GeoAlchemy</a>: Spatial extensions to the <a href="http://www.sqlalchemy.org/">SQLAlchemy ORM</a>.</li>
+<li><a href="https://github.com/SpatialPython/spatial_python/blob/master/packages.md">List of spatial packages</a></li>
+</ul>
+</section>
 <section id="examples-and-exercises" class="slide level1">
 <h1>Examples and Exercises</h1>
 </section>
@@ -384,9 +394,9 @@ pip install shapely fiona</code></pre>
 </section>
 <section id="conda" class="slide level1">
 <h1><a href="http://conda.pydata.org/docs/intro.html">conda</a></h1>
-<pre><code>conda config --add channels conda-forge  # Properly install GIS packages
-conda create -n maptime shapely fiona ipython
+<pre><code>conda create -n maptime -c conda-forge shapely fiona
 source activate maptime
+conda install ipython
 </code></pre>
 </section>
 <section id="shapes" class="slide level1">
@@ -436,6 +446,14 @@ neighborhoods.sort(key=lambda x: x.n_rodents / x.area)
 for n in neighborhoods:
     print(&#39;%s: %s&#39; % (n.name, n.n_rodents))
 </code></pre>
+</section>
+<section id="thats-all" class="slide level1">
+<h1>That's All!</h1>
+<ul>
+<li>Slides, code, and data can be found at <a href="https://github.com/jwass/maptime-boston-python" class="uri">https://github.com/jwass/maptime-boston-python</a></li>
+<li><p>Feel free to follow up at the <a href="http://www.meetup.com/Maptime-Boston/events/231732596/">meetup page</a>.</p></li>
+<li><p>Thanks to Michelle Fullwood, Sean Gillies, and Shaun Walbridge for early comments and feedback.</p></li>
+</ul>
 </section>
     </div>
   </div>
