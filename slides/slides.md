@@ -1,11 +1,11 @@
-% Geospatial Processing <br> with Python
-% <small>Jacob Wasserman / <a href="https://twitter.com/jwass200">@jwass2000</a></small>
-% <small><a href="https://twitter.com/MaptimeBoston">Maptime Boston</a> &mdash; 2016-06-15</small>
+# Geospatial Processing <br> with Python
+<small>Jacob Wasserman / <a href="https://twitter.com/jwass200">@jwass2000</a></small>
+<small><a href="https://twitter.com/MaptimeBoston">Maptime Boston</a> &mdash; 2016-06-15</small>
 
 
 <section>
 <h3>Follow along:</h3>
-<h3>[https://jwass.github.io/maptime-boston-python/slides](https://jwass.github.io/maptime-boston-python/slides)</h3>
+### [https://jwass.github.io/maptime-boston-python/slides](https://jwass.github.io/maptime-boston-python/slides)
 </section>
 
 
